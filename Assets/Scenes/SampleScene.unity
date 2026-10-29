@@ -576,6 +576,7 @@ GameObject:
   - component: {fileID: 578481207}
   - component: {fileID: 578481208}
   - component: {fileID: 578481209}
+  - component: {fileID: 578481210}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -654,7 +655,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578481204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3f8f2e438ca1834cbb9bcb7abd0a50f, type: 3}
   m_Name: 
@@ -690,9 +691,27 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: df70fa95-8a34-4494-b137-73ab6b9c7d37
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &578481210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578481204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b6b51e1a8ea2e4aade9cd14bfe51a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRun
+  animatorBody: {fileID: 776371611}
+  gravity: 0.0981
+  speedZ: 3
+  speedX: 3
+  speedJump: 8
+  accelerationZ: 10
 --- !u!1 &776371611
 GameObject:
   m_ObjectHideFlags: 0
