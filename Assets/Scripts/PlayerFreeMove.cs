@@ -37,7 +37,7 @@ public class PlayerFreeMove : MonoBehaviour
             }
 
             //横回転 Rotateメソッドで直接回転させる
-            transform.Rotate(0, Input.GetAxis("Horizontal") * 3, 0);
+            transform.Rotate(0, Input.GetAxis("Horizontal") * 300 * Time.deltaTime, 0);
 
             //ジャンプボタン　押されている間
             if (Input.GetButton("Jump"))
