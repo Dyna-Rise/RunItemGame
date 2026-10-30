@@ -75,6 +75,10 @@ public class PlayerRun : MonoBehaviour
             float ratioX = (targetLane * LaneWidth - transform.position.x) / LaneWidth;
             moveDirection.x = ratioX * speedX;
 
+            //自動前進するためのmoveDirectionのZ(前進加速)を決める
+            float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime);
+            moveDirection.z = Mathf.Clamp(acceleratedZ, 0, speedZ);
+
             //ジャンプボタン　押されている間
             //if (Input.GetButton("Jump"))
             if (jumpAction.IsPressed())
