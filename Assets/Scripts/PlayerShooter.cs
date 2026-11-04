@@ -30,11 +30,6 @@ public class PlayerShooter : MonoBehaviour
         bulletRemaining += num;
     }
 
-    public PlayerShooter(int bulletRemaining)
-    {
-        this.bulletRemaining = bulletRemaining;
-    }
-
     void Start()
     {
         //PlayerInputコンポーネントに設定されている現Mapを取得
