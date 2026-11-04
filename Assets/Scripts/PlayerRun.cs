@@ -7,6 +7,9 @@ public class PlayerRun : MonoBehaviour
     const int MinLane = -2; //最小レーン番号
     const int MaxLane = 2; //最大レーン番号
     const float LaneWidth = 2.0f; //レーン幅
+    const int DefaultLife = 3; //最大体力
+    const float StunDuration = 0.5f; //硬直時間
+
 
     CharacterController controller; //CharacterControllerを参照できる変数
     [SerializeField] private GameObject animatorBody; //Animatorコンポーネントをもっているオブジェクトの取得
@@ -15,6 +18,9 @@ public class PlayerRun : MonoBehaviour
     //Vector3 moveDirection = new Vector3(0, 0, 0);
     Vector3 moveDirection = Vector3.zero; //Moveメソッドに与える方向
     int targetLane; //目指すべきレーン番号
+
+    int life = DefaultLife; //現体力
+    float recoverTime = 0.0f; //硬直カウントダウン
 
     [Header("重力・前進・横移動・ジャンプ")]
     public float gravity; //重力値
@@ -25,10 +31,25 @@ public class PlayerRun : MonoBehaviour
     [Header("前進加速力")]
     public float accelerationZ = 10.0f; //加速力
 
+    [Header("ノックバック設定")]
+    public float knockbackForceZ = -6.0f; // 後ろに弾かれる強さ（マイナス値）
+
     Coroutine resetIntervalCol; //インプットのインターバル置くための変数
 
     private InputAction moveAction; //"Move"アクションを参照するための変数
     private InputAction jumpAction; //"Jump"アクションを参照するための変数
+
+    //体力の残を参照できるメソッド
+    public int Life()
+    {
+        return life;
+    }
+
+    //硬直カウントダウン中か体力0なら止まる
+    bool IsStun()
+    {
+        return recoverTime > 0.0f || life <= 0;
+    }
 
     void Start()
     {
@@ -71,18 +92,32 @@ public class PlayerRun : MonoBehaviour
                 else if (moveAction.ReadValue<Vector2>().x > 0) MoveToRight(); //右のレーン番号に変更
             }
 
-            //対象とするレーンをもとにmoveDirectionのX(横移動)を決める
-            float ratioX = (targetLane * LaneWidth - transform.position.x) / LaneWidth;
-            moveDirection.x = ratioX * speedX;
+            if (IsStun()) //硬直中なら何もできない
+            {
+                moveDirection.x = 0.0f; //横方向には動けない
+                //Z方向は0.05fずつノックバックが解消されるが、最大でも0で止まる
+                moveDirection.z = Mathf.Min(moveDirection.z + 0.05f, 0.0f);
 
-            //自動前進するためのmoveDirectionのZ(前進加速)を決める
-            float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime);
-            moveDirection.z = Mathf.Clamp(acceleratedZ, 0, speedZ);
+                recoverTime -= Time.deltaTime; //カウントダウンする
+            }
+            else
+            {
+                //対象とするレーンをもとにmoveDirectionのX(横移動)を決める
+                float ratioX = (targetLane * LaneWidth - transform.position.x) / LaneWidth;
+                moveDirection.x = ratioX * speedX;
+
+                //自動前進するためのmoveDirectionのZ(前進加速)を決める
+                float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime);
+                moveDirection.z = Mathf.Clamp(acceleratedZ, 0, speedZ);
+
+            }
 
             //ジャンプボタン　押されている間
             //if (Input.GetButton("Jump"))
             if (jumpAction.IsPressed())
             {
+                if (IsStun()) return; //スタン中は何も起こさない
+
                 moveDirection.y = speedJump; //y方向をセッティング
                 //animator.SetTrigger("jump"); //ジャンプアニメへの切替
             }
@@ -106,6 +141,8 @@ public class PlayerRun : MonoBehaviour
 
     public void MoveToLeft()
     {
+        if (IsStun()) return; //スタン中は何も起こさない
+
         //現レーンがまだ最小でなければ
         if (targetLane > MinLane)
         {
@@ -117,6 +154,8 @@ public class PlayerRun : MonoBehaviour
 
     public void MoveToRight()
     {
+        if (IsStun()) return; //スタン中は何も起こさない
+
         //現レーンがまだ最大でなければ
         if (targetLane < MaxLane)
         {
@@ -129,5 +168,25 @@ public class PlayerRun : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); //0.1秒待ってから
         resetIntervalCol = null; //コルーチン発動中である証明だった変数を解放
+    }
+
+    //Playerの接触判定
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (IsStun()) return; //スタン中なら二重にイベントは起こさない
+
+        //ぶつかった相手がEnemyなら
+        if (hit.gameObject.tag == "Enemy")
+        {
+            moveDirection.z = knockbackForceZ; //ノックバック：後ろに弾かれる力が最初にかかる
+            LifeDown(); //体力減少
+            recoverTime = StunDuration; //硬直時間をrecoverTimeにセット ※ここがダメージ硬直の始まり
+        }
+    }
+
+    //体力のダメージによる減少
+    public void LifeDown()
+    {
+        life--;
     }
 }
