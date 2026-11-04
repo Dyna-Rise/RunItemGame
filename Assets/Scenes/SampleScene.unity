@@ -797,6 +797,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooter
   bullet: {fileID: 7749046096501031610, guid: 737660d8a23765246b9dfec39060b5e4, type: 3}
+  bulletSpeed: 10
+  shootInterval: 0.5
 --- !u!1 &776371611
 GameObject:
   m_ObjectHideFlags: 0

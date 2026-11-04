@@ -15,6 +15,26 @@ public class PlayerShooter : MonoBehaviour
     public float bulletSpeed = 10.0f;
     public float shootInterval = 0.5f;
 
+    const int startRemaining = 10; //初期弾数
+    private int bulletRemaining = startRemaining; //弾の残数
+                                                  
+    //UIなどに残数を伝えるアクセサメソッド
+    public int GetRemaining()
+    {
+        return bulletRemaining;
+    }
+
+    //弾数を回復するメソッド
+    public void AddBullet(int num)
+    {
+        bulletRemaining += num;
+    }
+
+    public PlayerShooter(int bulletRemaining)
+    {
+        this.bulletRemaining = bulletRemaining;
+    }
+
     void Start()
     {
         //PlayerInputコンポーネントに設定されている現Mapを取得
@@ -25,8 +45,8 @@ public class PlayerShooter : MonoBehaviour
 
     void Update()
     {
-        //Attackアクションボタンが押された時 Shootメソッド
-        if (shootAction.WasPerformedThisFrame())
+        //Attackアクションボタンが押された時 かつ 残弾があれば　Shootメソッド
+        if (shootAction.WasPerformedThisFrame() && bulletRemaining > 0)
         {
             Shoot();
         }
@@ -36,6 +56,8 @@ public class PlayerShooter : MonoBehaviour
     {
         if (shootStart == null)
         {
+            bulletRemaining--; //残弾を１減らす
+
             //攻撃開始Bulletプレハブの生成とＺ軸前方へシュート
             GameObject obj = Instantiate(   //生成と同時にそれを変数に代入しておく
                 bullet,                     //生成対象オブジェクト
