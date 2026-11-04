@@ -5,12 +5,11 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerRun : MonoBehaviour
 {
-    const int DefaultLife = 3; //最大体力
-    const float StunDuration = 0.5f; //硬直時間
-
     const int MinLane = -2; //最小レーン番号
     const int MaxLane = 2; //最大レーン番号
     const float LaneWidth = 2.0f; //レーン幅
+    const int DefaultLife = 3; //最大体力
+    const float StunDuration = 0.5f; //硬直時間
 
     CharacterController controller; //CharacterControllerを参照できる変数
     Animator animator; //Animatorを参照できる変数
@@ -40,6 +39,12 @@ public class PlayerRun : MonoBehaviour
 
     [Header("ノックバック設定")]
     public float knockbackForceZ = -6.0f; // 後ろに弾かれる強さ（マイナス値）
+
+    //体力の残を参照できるメソッド
+    public int Life()
+    {
+        return life;
+    }
 
     //硬直カウントダウン中か体力0なら止まる
     bool IsStun()
@@ -152,6 +157,8 @@ public class PlayerRun : MonoBehaviour
     //ジャンプメソッド
     public void Jump()
     {
+        if (IsStun()) return; //スタン中は何も起こさない
+
         moveDirection.y = speedJump; //上方向に値を代入
     }
 
