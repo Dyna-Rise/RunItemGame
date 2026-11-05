@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
         StartCoroutine(DisplayChange());
 
         UpdateLife(); //プレイヤー体力を反映
-        UpadateBullet(); //残弾数を反映
+        UpdateBullet(); //残弾数を反映
     }
 
     //時間差でステータス文字を非表示
@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour
     }
 
     //Bulletの残弾数を更新
-    public void UpadateBullet()
+    public void UpdateBullet()
     {
         //PlayerShooterスクリプトを参照できるようにする
         PlayerShooter player = GameObject.FindAnyObjectByType<PlayerShooter>();

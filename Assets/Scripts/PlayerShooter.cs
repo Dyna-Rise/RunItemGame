@@ -52,6 +52,10 @@ public class PlayerShooter : MonoBehaviour
         if (shootStart == null)
         {
             bulletRemaining--; //残弾を１減らす
+            
+            //UIControllerを探して、残弾更新メソッド
+            UIController controller = GameObject.FindAnyObjectByType<UIController>();
+            controller.UpdateBullet();
 
             //攻撃開始Bulletプレハブの生成とＺ軸前方へシュート
             GameObject obj = Instantiate(   //生成と同時にそれを変数に代入しておく

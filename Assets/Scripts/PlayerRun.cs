@@ -211,5 +211,9 @@ public class PlayerRun : MonoBehaviour
     public void LifeDown()
     {
         life--;
+
+        //UIControllerを探して、ライフ更新メソッド
+        UIController controller = GameObject.FindAnyObjectByType<UIController>();
+        controller.UpdateLife();
     }
 }
