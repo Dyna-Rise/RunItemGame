@@ -67,6 +67,8 @@ public class PlayerRun : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameState == GameState.GameEnd) return;
+
         //点滅処理
         if (IsStun())
         {
@@ -74,17 +76,17 @@ public class PlayerRun : MonoBehaviour
 
             if (val > 0)
             {
-                animatorBody.GetComponent<MeshRenderer>().enabled = true;
+                animatorBody.SetActive(true);
             }
             else
             {
-                animatorBody.GetComponent<MeshRenderer>().enabled = false;
+                animatorBody.SetActive(false);
             }
         }
         else //ダメージ中じゃない時
         {
             //姿を表す
-            animatorBody.GetComponent<MeshRenderer>().enabled = true;
+            animatorBody.SetActive(true);
         }
 
 
@@ -211,5 +213,22 @@ public class PlayerRun : MonoBehaviour
     public void LifeDown()
     {
         life--;
+
+        UIController controller = GameObject.FindAnyObjectByType<UIController>();
+        controller.UpdateLife();
+
+        if (life <= 0)
+        {
+            StartCoroutine(GameOver());
+        }
+    }
+
+    IEnumerator GameOver()
+    {        
+        GameManager.gameState = GameState.GameOver;
+
+        yield return new WaitForSeconds(3.0f);
+        animatorBody.SetActive(false);
+
     }
 }

@@ -22,6 +22,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if(gameState == GameState.GameOver)
+        {
+            UIController controller = GameObject.FindAnyObjectByType<UIController>();
+            controller.GameOverDisplay();
+
+
+            gameState = GameState.GameEnd;
+        }
     }
 }
