@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     //ダメージ中のコルーチンを参照する変数
     Coroutine damageStart;
 
+    public GameObject effectObject; //撃破時の生成エフェクト
+
     void Update()
     {
         //もしもダメージコルーチン変数がnullでなければ(ダメージ中）
@@ -47,6 +49,7 @@ public class Enemy : MonoBehaviour
                 enemyLife--; //体力が1減る
                 if (enemyLife <= 0)
                 {
+                    CreateEffect();
                     Destroy(gameObject); //消滅
                 }
                 else //体力が残っていれば
@@ -57,6 +60,7 @@ public class Enemy : MonoBehaviour
             //ぶつかった相手がSlashなら即撃破
             else if(other.gameObject.tag == "Slash")
             {
+                CreateEffect();
                 Destroy(gameObject);
             }
         }
@@ -71,5 +75,13 @@ public class Enemy : MonoBehaviour
 
         //見た目のMeshRendererをON
         enemyBody.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    void CreateEffect()
+    {
+        Instantiate(
+             effectObject,
+             transform.position,
+             Quaternion.identity);
     }
 }

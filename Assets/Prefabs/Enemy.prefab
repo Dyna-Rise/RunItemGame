@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   enemyBody: {fileID: 2882564300929023176}
   freezeTime: 1
+  effectObject: {fileID: 4691598244002475420, guid: d63e97192579b2e448f943ee5865469b, type: 3}
 --- !u!54 &1641181280963465688
 Rigidbody:
   m_ObjectHideFlags: 0
