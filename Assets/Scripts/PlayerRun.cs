@@ -10,7 +10,6 @@ public class PlayerRun : MonoBehaviour
     const int DefaultLife = 3; //最大体力
     const float StunDuration = 0.5f; //硬直時間
 
-
     CharacterController controller; //CharacterControllerを参照できる変数
     [SerializeField] private GameObject animatorBody; //Animatorコンポーネントをもっているオブジェクトの取得
     Animator animator; //Animatorを参照できる変数
@@ -39,6 +38,9 @@ public class PlayerRun : MonoBehaviour
     private InputAction moveAction; //"Move"アクションを参照するための変数
     private InputAction jumpAction; //"Jump"アクションを参照するための変数
 
+    //[Header("プレイヤーの見た目オブジェクト")]
+    //public GameObject playerBody;
+
     //体力の残を参照できるメソッド
     public int Life()
     {
@@ -65,6 +67,27 @@ public class PlayerRun : MonoBehaviour
 
     void Update()
     {
+        //点滅処理
+        if (IsStun())
+        {
+            float val = Mathf.Sin(Time.time * 50);
+
+            if (val > 0)
+            {
+                animatorBody.GetComponent<MeshRenderer>().enabled = true;
+            }
+            else
+            {
+                animatorBody.GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+        else //ダメージ中じゃない時
+        {
+            //姿を表す
+            animatorBody.GetComponent<MeshRenderer>().enabled = true;
+        }
+
+
         //CharacterControllerコンポーネントが接地判断をもっている
         //入力検知は地面にいる時
         if (controller.isGrounded)
@@ -86,7 +109,7 @@ public class PlayerRun : MonoBehaviour
             //transform.Rotate(0, moveAction.ReadValue<Vector2>().x * 300 * Time.deltaTime, 0);
 
             //コルーチンが発動していない時だけ入力処理
-            if(resetIntervalCol == null)
+            if (resetIntervalCol == null)
             {
                 if (moveAction.ReadValue<Vector2>().x < 0) MoveToLeft(); //左のレーン番号に変更
                 else if (moveAction.ReadValue<Vector2>().x > 0) MoveToRight(); //右のレーン番号に変更
