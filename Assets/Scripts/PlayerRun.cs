@@ -74,17 +74,17 @@ public class PlayerRun : MonoBehaviour
 
             if (val > 0)
             {
-                animatorBody.GetComponent<MeshRenderer>().enabled = true;
+                animatorBody.SetActive(true);
             }
             else
             {
-                animatorBody.GetComponent<MeshRenderer>().enabled = false;
+                animatorBody.SetActive(false);
             }
         }
         else //ダメージ中じゃない時
         {
             //姿を表す
-            animatorBody.GetComponent<MeshRenderer>().enabled = true;
+            animatorBody.SetActive(true);
         }
 
 
