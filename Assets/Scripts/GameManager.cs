@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 //自作の列挙型（ゲームのステータス）
@@ -14,10 +16,13 @@ public class GameManager : MonoBehaviour
 {
     //自作した型を扱うStatic変数
     public static GameState gameState;
+    GameObject virtualCamera;
 
     void Start()
     {
         gameState = GameState.IsPlay;
+        virtualCamera = GameObject.FindGameObjectWithTag("ViartualCamera");
+        virtualCamera.SetActive(false);
     }
 
     void Update()
@@ -28,7 +33,16 @@ public class GameManager : MonoBehaviour
             controller.GameOverDisplay();
 
 
+            virtualCamera.SetActive(true);
+          Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+
             gameState = GameState.GameEnd;
         }
+    }
+
+    IEnumerator DemoCamera()
+    {
+        yield return new WaitForSeconds(1.0f);
+
     }
 }

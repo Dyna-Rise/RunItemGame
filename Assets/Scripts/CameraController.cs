@@ -12,6 +12,9 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        transform.position = new Vector3(0, 4.5f, 7.5f);
+        transform.rotation = Quaternion.Euler(15.5f, 0, 0);
+
         //playerタグがついているオブジェクトを探す
         player = GameObject.FindGameObjectWithTag("Player");
 
