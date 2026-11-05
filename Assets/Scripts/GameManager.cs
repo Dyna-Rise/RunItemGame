@@ -24,12 +24,13 @@ public class GameManager : MonoBehaviour
     {
         if(gameState == GameState.GameOver)
         {
-
+            Debug.Log("Gameover");
             //UIControllerを探し出してゲームオーバー用のUI表示命令
             UIController contoller = GameObject.FindAnyObjectByType<UIController>();
             contoller.GameOverDisplay();
 
             gameState = GameState.GameEnd;
+            Debug.Log("GameEnd");
         }
     }
 }

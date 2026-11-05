@@ -223,7 +223,6 @@ public class PlayerRun : MonoBehaviour
         {
             //ステータス変更
             GameManager.gameState = GameState.GameOver;
-
         }
     }
 }
