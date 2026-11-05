@@ -67,6 +67,8 @@ public class PlayerRun : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameState == GameState.GameEnd) return;
+
         //点滅処理
         if (IsStun())
         {
@@ -215,5 +217,13 @@ public class PlayerRun : MonoBehaviour
         //UIControllerを探して、ライフ更新メソッド
         UIController controller = GameObject.FindAnyObjectByType<UIController>();
         controller.UpdateLife();
+
+        //ライフが0以下になったら
+        if(life <= 0)
+        {
+            //ステータス変更
+            GameManager.gameState = GameState.GameOver;
+
+        }
     }
 }
