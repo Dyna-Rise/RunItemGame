@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Playables;
 
 //自作の列挙型（ゲームのステータス）
 public enum GameState
@@ -15,19 +16,17 @@ public class GameManager : MonoBehaviour
 {
     //自作した型を扱うStatic変数
     public static GameState gameState;
+    public PlayableDirector timeline; 
 
-    private GameObject mixingCamera;
+    void Awake()
+    {
+        //mainカメラのCinemachineBrainを無効化
+        Camera.main.GetComponent<CinemachineBrain>().enabled = false;
+    }
 
     void Start()
     {
         gameState = GameState.IsPlay;
-
-        //mixingカメラを探索
-        mixingCamera = GameObject.FindGameObjectWithTag("MixngCamera");
-        //mixingカメラを非表示
-        mixingCamera.SetActive(false);
-        //mainカメラのCinemachineBrainを無効化
-        Camera.main.GetComponent<CinemachineBrain>().enabled = false;
     }
 
     void Update()
@@ -39,8 +38,11 @@ public class GameManager : MonoBehaviour
             UIController contoller = GameObject.FindAnyObjectByType<UIController>();
             contoller.GameOverDisplay();
 
-            mixingCamera.SetActive(true); //mixingカメラを復活
             Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+
+            //GetComponent<CameraTransition>().OnGameOver();
+
+            timeline.Play();
 
             gameState = GameState.GameEnd;
             Debug.Log("GameEnd");
