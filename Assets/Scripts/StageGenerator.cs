@@ -61,7 +61,7 @@ public class StageGenerator : MonoBehaviour
         int nextStageChip = Random.Range(0, stageChips.Length);
 
         //引数のフロア番号に対応した座標に、配列から選ばれたフロアを生成
-        GameObject stageObject = (GameObject)Instantiate(
+        GameObject stageObject = Instantiate(
             stageChips[nextStageChip],
             new Vector3(0, 0, chipIndex * StageChipSize),
             Quaternion.identity

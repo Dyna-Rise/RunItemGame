@@ -54,6 +54,11 @@ public class Enemy : MonoBehaviour
                     damageStart = StartCoroutine(DamageStart()); //コルーチンの発動
                 }
             }
+            //ぶつかった相手がSlashなら即撃破
+            else if(other.gameObject.tag == "Slash")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
