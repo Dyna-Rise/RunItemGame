@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using System.Collections;
 
 //自作の列挙型（ゲームのステータス）
 public enum GameState
@@ -16,16 +17,18 @@ public class GameManager : MonoBehaviour
     //自作した型を扱うStatic変数
     public static GameState gameState;
 
-    private GameObject mixingCamera;
+    //private GameObject mixingCamera;
+
+    public CinemachineCamera[] cameras;
 
     void Start()
     {
         gameState = GameState.IsPlay;
 
         //mixingカメラを探索
-        mixingCamera = GameObject.FindGameObjectWithTag("MixngCamera");
+        //mixingCamera = GameObject.FindGameObjectWithTag("MixngCamera");
         //mixingカメラを非表示
-        mixingCamera.SetActive(false);
+        //mixingCamera.SetActive(false);
         //mainカメラのCinemachineBrainを無効化
         Camera.main.GetComponent<CinemachineBrain>().enabled = false;
     }
@@ -34,16 +37,23 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameState.GameOver)
         {
-            Debug.Log("Gameover");
             //UIControllerを探し出してゲームオーバー用のUI表示命令
             UIController contoller = GameObject.FindAnyObjectByType<UIController>();
             contoller.GameOverDisplay();
 
-            mixingCamera.SetActive(true); //mixingカメラを復活
-            Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+            //mixingCamera.SetActive(true); //mixingカメラを復活
+            Camera.main.GetComponent<CinemachineBrain>().enabled = true; //Brainを復活
+
+            StartCoroutine(GameOverCamera());
 
             gameState = GameState.GameEnd;
-            Debug.Log("GameEnd");
         }
+    }
+
+    IEnumerator GameOverCamera()
+    {
+        yield return null; //1フレーム待ってから
+
+        cameras[1].Priority = 2;
     }
 }
