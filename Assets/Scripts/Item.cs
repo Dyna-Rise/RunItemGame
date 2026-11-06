@@ -21,11 +21,14 @@ public class Item : MonoBehaviour
             {
                 case ItemType.Life:
                     other.gameObject.GetComponent<PlayerRun>().RecoverLife(value);
+                    FindAnyObjectByType<UIController>().UpdateLife(); //UI更新
                     break;
                 case ItemType.Bullet:
                     other.gameObject.GetComponent<PlayerShooter>().AddBullet(value);
+                    FindAnyObjectByType<UIController>().UpdateBullet();　//Bullet更新
                     break;
             }
+            Destroy(gameObject);
         }
     }
 }
