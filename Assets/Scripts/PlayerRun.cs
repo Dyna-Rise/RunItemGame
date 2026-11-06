@@ -47,6 +47,16 @@ public class PlayerRun : MonoBehaviour
         return life;
     }
 
+    //Lifeを回復させるメソッド
+    public void RecoverLife(int val)
+    {
+        life += val;
+        if(life > DefaultLife)
+        {
+            life = DefaultLife;
+        }
+    }
+
     //硬直カウントダウン中か体力0なら止まる
     bool IsStun()
     {
