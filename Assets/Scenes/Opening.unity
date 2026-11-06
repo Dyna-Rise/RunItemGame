@@ -476,6 +476,7 @@ MonoBehaviour:
   messageText: {fileID: 1244945520}
   faceImage: {fileID: 1999515599}
   textSpeed: 0.04
+  nextScene: 
 --- !u!1 &411377802
 GameObject:
   m_ObjectHideFlags: 0

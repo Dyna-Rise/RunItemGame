@@ -19,3 +19,6 @@ MonoBehaviour:
   - name: 
     message: test2_test2_test2_test2_test2_test2_test2_test2_test2_test2_test2_test2_test2_test2_test2_test2_
     faceImage: {fileID: 0}
+  - name: 
+    message: test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_test3_
+    faceImage: {fileID: 0}
