@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Playables;
 
 //自作の列挙型（ゲームのステータス）
 public enum GameState
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     //private GameObject mixingCamera;
 
     public CinemachineCamera[] cameras;
+
+    public PlayableDirector playableDirector;
 
     void Start()
     {
@@ -44,7 +47,9 @@ public class GameManager : MonoBehaviour
             //mixingCamera.SetActive(true); //mixingカメラを復活
             Camera.main.GetComponent<CinemachineBrain>().enabled = true; //Brainを復活
 
-            StartCoroutine(GameOverCamera());
+            //StartCoroutine(GameOverCamera());
+
+            playableDirector.Play(); //意図的に作っておいたTimelineを再生する
 
             gameState = GameState.GameEnd;
         }
