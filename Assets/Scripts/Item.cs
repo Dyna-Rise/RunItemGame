@@ -26,7 +26,6 @@ public class Item : MonoBehaviour
                     other.gameObject.GetComponent<PlayerShooter>().AddBullet(value);
                     break;
             }
-
         }
     }
 }
