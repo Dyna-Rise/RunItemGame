@@ -53,6 +53,16 @@ public class GameManager : MonoBehaviour
 
             gameState = GameState.GameEnd;
         }
+
+        //ゴールに着いたら（Goalスクリプトがステータスを変える）
+        if (gameState == GameState.GameClear)
+        {
+            //UIControllerを探し出してゲームクリア用のUI表示命令
+            UIController contoller = GameObject.FindAnyObjectByType<UIController>();
+            contoller.GameClearDisplay();
+
+            gameState = GameState.GameEnd; //GameEndにするとPlayerは止まる
+        }
     }
 
     IEnumerator GameOverCamera()
