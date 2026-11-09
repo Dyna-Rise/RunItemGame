@@ -31,6 +31,7 @@ public class Item : MonoBehaviour
                     break;
                 case ItemType.Upgrade:
                     //ŠÇ—ƒŠƒXƒg‚É‰Á‚¦‚é
+                    GameData.AddUpgrade(upgradeData);
                     break;
             }
             Destroy(gameObject);
