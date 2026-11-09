@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 7660803914176385725}
   - component: {fileID: 6009191694979935147}
   - component: {fileID: 2698846354129415667}
+  - component: {fileID: 729433568595060778}
   m_Layer: 0
   m_Name: DefaultStage
   m_TagString: Untagged
@@ -267,3 +268,21 @@ MonoBehaviour:
   offsetZ: 0
   posY: 1
   spawnRate: 0.5
+--- !u!114 &729433568595060778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134632036991991592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec786e1be9705a46a44333d75dd1411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapGenerator
+  minInterval: 5
+  maxInterval: 15
+  offsetZ: 5
+  posY: 0.5
+  spawnRate: 0.3
+  trapPrefab: {fileID: 7355987087326364557, guid: 0177f82e6532aaa42ba716ac76979b90, type: 3}
