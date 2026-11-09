@@ -12,7 +12,7 @@ public enum UpgradeType
 [CreateAssetMenu(fileName = "NewUpgradeData", menuName = "ScriptableObjects/UpgradeData", order = 2)]
 public class UpgradeData : ScriptableObject
 {
-    public string upgradeName; //表示名
+    public string upgradeName; //表示名（アイコン名)
 
     [TextArea(2, 5)]
     public string description; //説明文
