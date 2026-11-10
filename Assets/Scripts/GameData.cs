@@ -12,6 +12,9 @@ public static class GameData
     //スロットにセット中の拡張アイテム（最大SlotCount個）
     public static List<UpgradeData> equippedUpgrades = new List<UpgradeData>();
 
+    //クリアしたシーン名を管理
+    public static List<string> clearStages = new List<string>();
+
     //拡張アイテムを入手する（同じものは2つ持たない）
     public static void AddUpgrade(UpgradeData data)
     {
