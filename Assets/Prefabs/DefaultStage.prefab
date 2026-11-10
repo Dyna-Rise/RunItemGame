@@ -263,6 +263,7 @@ MonoBehaviour:
   itemPrefabs:
   - {fileID: 4289072585980075954, guid: 8c0b3bc4e1394f642824b649c08b812c, type: 3}
   - {fileID: 3676265201148869181, guid: 31e9b78e7d1db5a47a1db51cdb849a3d, type: 3}
+  - {fileID: 5755035386832597738, guid: bab234b541bbed64bb19096ab3251646, type: 3}
   minInterval: 30
   maxInterval: 30
   offsetZ: 0
