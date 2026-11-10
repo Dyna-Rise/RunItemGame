@@ -43,6 +43,8 @@ public class PlayerShooter : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameState == GameState.GameEnd) return;
+
         //Attackアクションボタンが押された時 かつ 残弾があれば　Shootメソッド
         if (shootAction.WasPerformedThisFrame() && bulletRemaining > 0)
         {

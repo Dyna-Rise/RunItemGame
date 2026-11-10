@@ -48,6 +48,11 @@ public class PlayerRun : MonoBehaviour
         return life;
     }
 
+    public void GoalAnimation()
+    {
+        animator.SetBool("Idle", true);
+    }
+
     //Lifeを回復させるメソッド
     public void RecoverLife(int val)
     {
@@ -73,6 +78,10 @@ public class PlayerRun : MonoBehaviour
         //Playerについているコンポーネントの取得
         controller = GetComponent<CharacterController>();
         animator = animatorBody.GetComponent<Animator>();
+
+        //点滅でanimatorBodyを非表示→表示にしても、アニメの状態がリセットされないようにする
+        //（これがないと、ダメージアニメが点滅のたびに最初の状態に戻ってしまう）
+        animator.keepAnimatorStateOnDisable = true;
 
         //PlayerInputコンポーネントに設定されている現Mapは何かを取得＝（Playerマップ）
         InputActionMap actionMap = GetComponent<PlayerInput>().currentActionMap;
@@ -159,7 +168,7 @@ public class PlayerRun : MonoBehaviour
                 if (IsStun()) return; //スタン中は何も起こさない
 
                 moveDirection.y = speedJump; //y方向をセッティング
-                //animator.SetTrigger("jump"); //ジャンプアニメへの切替
+                animator.SetTrigger("Jump"); //ジャンプアニメへの切替
             }
         }
 
@@ -218,7 +227,9 @@ public class PlayerRun : MonoBehaviour
         //ぶつかった相手がEnemyなら
         if (hit.gameObject.tag == "Enemy")
         {
+
             moveDirection.z = knockbackForceZ; //ノックバック：後ろに弾かれる力が最初にかかる
+            animator.SetTrigger("Damage");
             LifeDown(); //体力減少
             recoverTime = StunDuration; //硬直時間をrecoverTimeにセット ※ここがダメージ硬直の始まり
         }
@@ -238,6 +249,7 @@ public class PlayerRun : MonoBehaviour
         {
             //ステータス変更
             GameManager.gameState = GameState.GameOver;
+            animator.SetBool("Over", true); //ゲームオーバーのアニメ（StunnedLoop）へ
         }
     }
 }

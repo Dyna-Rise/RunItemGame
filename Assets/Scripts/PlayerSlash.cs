@@ -25,6 +25,8 @@ public class PlayerSlash : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameState == GameState.GameEnd) return;
+
         //該当ボタンが押されたとき
         if (slashAction.WasPerformedThisFrame())
         {
