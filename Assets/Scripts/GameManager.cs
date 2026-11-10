@@ -2,6 +2,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 //自作の列挙型（ゲームのステータス）
 public enum GameState
@@ -57,6 +58,16 @@ public class GameManager : MonoBehaviour
         //ゴールに着いたら（Goalスクリプトがステータスを変える）
         if (gameState == GameState.GameClear)
         {
+            //現シーン名を取得
+            string name = SceneManager.GetActiveScene().name;
+            //まだステージクリアリストに入っている名前でなければ
+            if(!GameData.clearStages.Contains(name))
+            {
+                GameData.clearStages.Add(name); //リストに記載
+            }
+
+            GameData.Save(); //オートセーブ
+
             //UIControllerを探し出してゲームクリア用のUI表示命令
             UIController contoller = GameObject.FindAnyObjectByType<UIController>();
             contoller.GameClearDisplay();

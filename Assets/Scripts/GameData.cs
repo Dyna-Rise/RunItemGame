@@ -57,7 +57,7 @@ public static class GameData
     {
         ownedUpgrades.Clear();
         equippedUpgrades.Clear();
-        GameData.clearStages.Clear();
+        clearStages.Clear();
     }
 
     //セーブデータがあるかどうか
@@ -71,7 +71,7 @@ public static class GameData
     {
         //クリアしたステージ名を「,」でつないで1つの文字列にして保存
         //例："BaseStage,Stage2"
-        PlayerPrefs.SetString(ClearStagesKey, string.Join(",", GameData.clearStages));
+        PlayerPrefs.SetString(ClearStagesKey, string.Join(",", clearStages));
 
         //所持アイテムはアセットの名前を「,」でつないで保存
         //例："LifeUp,PierceBullet"
@@ -94,7 +94,7 @@ public static class GameData
         string stages = PlayerPrefs.GetString(ClearStagesKey, "");
         foreach (string stage in stages.Split(','))
         {
-            if (stage != "") GameData.clearStages.Add(stage);
+            if (stage != "") clearStages.Add(stage);
         }
 
         //「,」で区切った名前と同じ名前の拡張アイテムを探して、所持リストに戻す
