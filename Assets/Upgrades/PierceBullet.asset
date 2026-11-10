@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9dae84294994ca4b8b69f3d72413f55, type: 3}
-  m_Name: SpierceBullet
+  m_Name: PierceBullet
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: "\u8CAB\u901A\u5F3E"
   description: "\u5F3E\u304C\u6575\u306B\u5F53\u305F\u3063\u3066\u3082\u6D88\u3048\u305A\u306B\u7A81\u304D\u629C\u3051\u308B"

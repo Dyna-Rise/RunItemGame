@@ -1332,7 +1332,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6f0d6fbeab692ec49b1ff7efd487f96d, type: 2}
   - {fileID: 11400000, guid: 075614a470ca7d64c90d228da821a63f, type: 2}
   - {fileID: 11400000, guid: 09ec83434a7405a45b9b7d0cc0cdb8b0, type: 2}
-  firstStageButton: {fileID: 0}
+  firstStageButton: {fileID: 340518119}
 --- !u!4 &1525927827
 Transform:
   m_ObjectHideFlags: 0

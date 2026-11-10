@@ -13,6 +13,11 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (GameData.HasUpgrade(UpgradeType.PierceBullet) && other.gameObject.tag == "Enemy")
+        {
+            return;
+        }
+
         //何かにぶつかったら消滅
         Destroy(gameObject);
     }

@@ -32,6 +32,9 @@ public class PlayerShooter : MonoBehaviour
 
     void Start()
     {
+        //装備リストにBulletUpがあればその分を加算
+        bulletRemaining = startRemaining + GameData.GetValue(UpgradeType.BulletUp);
+
         //PlayerInputコンポーネントに設定されている現Mapを取得
         InputActionMap actionMap = GetComponent<PlayerInput>().currentActionMap;
         //現マップ上にいる「Attack」というアクションを取得

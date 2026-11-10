@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_updatePierceBullet Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2529983440941322773, guid: 420946c78777a874f838089f75be927d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 29edac9d5d309814a888a7b33665b504, type: 2}
     - target: {fileID: 7724318415133674288, guid: 420946c78777a874f838089f75be927d, type: 3}
       propertyPath: itemType
       value: 2
