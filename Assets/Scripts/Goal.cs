@@ -9,6 +9,9 @@ public class Goal : MonoBehaviour
         {
             //ステータスをゲームクリアに変更（あとはGameManagerにおまかせ）
             GameManager.gameState = GameState.GameClear;
+
+            //ゴールのアニメ
+            other.gameObject.GetComponent<PlayerRun>().GoalAnimation();
         }
     }
 }
